@@ -1,4 +1,6 @@
-﻿using fp_stack.core.Models;
+﻿using fp_stack.api.Custom;
+using fp_stack.core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,9 +11,12 @@ using System.Threading.Tasks;
 namespace fp_stack.api.Controllers
 {
     [ApiController]
-    [ApiVersion("1.0")]
-    [Route("api/v{apiVersion}/[controller]")]
-    [EnableCors("Default")]
+    [Route("api/[controller]")]
+    //[ApiVersion("1.0")]
+    //[Route("api/v{apiVersion}/[controller]")]
+    //[EnableCors("Default")]
+    //[CustomAuthorize]
+    [Authorize]
     public class PerguntasController : Controller
     {
         private readonly Context _context;

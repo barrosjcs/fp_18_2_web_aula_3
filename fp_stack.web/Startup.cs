@@ -29,6 +29,15 @@ namespace fp_stack.web
             services.AddDbContext<Context>(options => options.UseSqlServer(connection));
 
             services.AddMvc();
+
+            // Criar autenticação no login
+            services.AddAuthentication("app")
+                    .AddCookie("app",
+                    o =>
+                    {
+                        o.LoginPath = "/account/index";
+                        o.AccessDeniedPath = "/account/denied";
+                    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +50,9 @@ namespace fp_stack.web
 
             app.UseMeuLog();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
